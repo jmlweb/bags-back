@@ -1,0 +1,31 @@
+{
+  "name": "bags-back",
+  "version": "1.0.0",
+  "description": "bob backend",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "start": "node dist/index.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watchAll"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.11"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.1",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0",
+    "tsc-watch": "^4.1.0",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.5"
+  }
+}
