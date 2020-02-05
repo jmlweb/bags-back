@@ -1,4 +1,5 @@
 module.exports = {
+  globalSetup: '<rootDir>/setupTest.js',
   roots: ["<rootDir>/src"],
   transform: {
     "^.+\\.tsx?$": "ts-jest"
