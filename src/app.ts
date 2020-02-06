@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import userRoutes from './user';
 import orderRoutes from './order';
@@ -7,6 +8,7 @@ import connect from './connect';
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 connect();
