@@ -3,12 +3,16 @@ import mongoose from 'mongoose';
 
 import app from './app';
 import { User } from './user';
+import { Order } from './order';
 
 describe('app', () => {
   let user1Id: string;
   let user2Id: string;
+  let order1Id: string;
+  let order2Id: string;
   beforeAll(async () => {
     await User.deleteMany({});
+    await Order.deleteMany({});
   });
 
   afterAll(async () => {
@@ -68,5 +72,53 @@ describe('app', () => {
         email: 'john@doe.com',
       });
     expect(response.body.email).toBe('john@doe.com');
+  });
+
+  it('should be possible to create an order for an user', async () => {
+    const response1 = await request(app)
+      .post('/order')
+      .send({
+        user: user2Id,
+        bagsCount: 2,
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+    order1Id = response1.body._id;
+    expect(response1.body.bagsCount).toBe(2);
+    const response2 = await request(app)
+      .post('/order')
+      .send({
+        user: user2Id,
+        bagsCount: 1,
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+    order2Id = response2.body._id;
+    expect(response2.body.bagsCount).toBe(1);
+  });
+  it('should be possible to update an order', async () => {
+    const response = await request(app)
+      .put(`/order/${order1Id}`)
+      .send({
+        bagsCount: 4,
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+    expect(response.body.bagsCount).toBe(4);
+  });
+  it('should be possible to remove an order', async () => {
+    const response = await request(app)
+      .delete(`/order/${order2Id}`)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/);
+    expect(response.body.bagsCount).toBe(1);
+  });
+  it('when removing an user, the associated orders are removed also', async () => {
+    const response1 = await request(app).delete(`/user/${user2Id}`);
+    expect(response1.body.name).toBe('John Doe');
+    const response2 = await request(app).get('/user');
+    expect(response2.body.length).toBe(0);
+    const response3 = await request(app).get('/order');
+    expect(response3.body.length).toBe(0);
   });
 });

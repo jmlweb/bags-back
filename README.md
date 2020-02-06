@@ -37,3 +37,4 @@ _note:_ depending on the size of the config items, it may be a good idea to stor
 - Better code organization.
 - More testing
 - Logging, etc
+- Use a subdoc for orders?
