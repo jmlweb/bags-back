@@ -1,4 +1,5 @@
 import User, { UserDocument } from './user.model';
+import { Order } from '../order';
 
 async function list(): Promise<UserDocument[]> {
   return User.find();
@@ -27,7 +28,12 @@ async function update(
 }
 
 async function remove(id: string): Promise<UserDocument | null> {
-  return User.findByIdAndDelete(id);
+  const user = await User.findByIdAndDelete(id);
+  // this should be done in the model but it wasn't working and I was running out of time
+  if (user) {
+    await Order.deleteMany({ user: user._id });
+  }
+  return user;
 }
 
 export default {
