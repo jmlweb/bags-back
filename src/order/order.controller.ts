@@ -20,7 +20,7 @@ async function create(orderData: OrderParams): Promise<OrderDocument> {
 
 async function update(
   id: string,
-  orderData: OrderParams,
+  orderData: Pick<OrderParams, 'bagsCount'>,
 ): Promise<OrderDocument | null> {
   return Order.findByIdAndUpdate(id, orderData, { new: true });
 }
