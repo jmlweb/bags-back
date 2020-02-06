@@ -1,5 +1,5 @@
 function validateName(name: string): boolean {
-  return /(^[A-Z])+([A-Za-z])\w+( )([   A-Za-z])+/.test(name)
+  return /(^[A-Z])+([A-z\u00C0-\u00FF])+( )([   A-z\u00C0-\u00FF])+/.test(name);
 }
 
 export default validateName;

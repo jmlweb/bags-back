@@ -1,5 +1,9 @@
 # Bags API
 
+🚧 This API is supposed to be used in a secure environment. It doesn't have any authorization mechanism and it exposes \_id fields.
+
+---
+
 The "User" model contains 3 fields:
 
 - email (added to maintain atomicity)
@@ -15,7 +19,7 @@ The "User" model contains 3 fields:
 
 Copy and paste `.env.example` into `.env` and adapt it for your environment.
 
-*note:* depending on the size of the config items, it may be a good idea to store them in a json file, instead of env vars.
+_note:_ depending on the size of the config items, it may be a good idea to store them in a json file, instead of env vars.
 
 ## Building and executing
 
@@ -26,3 +30,9 @@ Copy and paste `.env.example` into `.env` and adapt it for your environment.
 ### Development mode
 
 `npm run dev`
+
+## Todo
+
+- Implement security with Helmet, csurf, etc.
+- Better code organization.
+- More testing

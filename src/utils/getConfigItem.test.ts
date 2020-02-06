@@ -16,10 +16,10 @@ describe('getConfigItem', () => {
     process.env = OLD_ENV;
   });
 
-  it('should throw an error when the key doesn\'t exist', () => {
+  it("should throw an error when the key doesn't exist", () => {
     expect(() => {
       getConfigItem('badKey');
-    }).toThrowError('The key passet doesn\' exist on .env');
+    }).toThrowError("The key passed doesn' exist on .env");
   });
 
   it('should return the proper value when the key exists', () => {

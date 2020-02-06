@@ -1,13 +1,11 @@
 import mongoose from 'mongoose';
+
 import User from './user.model';
+import connect from '../connect';
 
 describe('User model', () => {
   beforeAll(async () => {
-    const url = process.env.TEST_MONGO_CONNECTION_STRING;
-    await mongoose.connect(url as string, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    connect();
   });
 
   beforeEach(async () => {
@@ -21,7 +19,7 @@ describe('User model', () => {
   it('validation throws an error when the name of the user is not correct', async () => {
     const user = new User({
       email: 'testuser@test.com',
-      name: 'testuser'
+      name: 'testuser',
     });
     expect(user.validate).toThrow();
   });
@@ -29,7 +27,7 @@ describe('User model', () => {
   it('validation not throws for valid data', async () => {
     const user = new User({
       email: 'testuser@test.com',
-      name: 'Test user'
+      name: 'Test user',
     });
 
     await user.save();

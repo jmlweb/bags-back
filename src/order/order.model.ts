@@ -1,10 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-import { UserDocument } from '../user';
-
 export interface OrderDocument extends Document {
   bagsCount: number;
-  user: UserDocument['_id'],
+  user: Document['_id'];
 }
 
 const OrderSchema: Schema = new Schema({
@@ -12,7 +10,7 @@ const OrderSchema: Schema = new Schema({
   bagsCount: {
     type: Number,
     default: 0,
-  }
+  },
 });
 
 const Order = mongoose.model<OrderDocument>('Order', OrderSchema);
