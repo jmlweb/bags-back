@@ -6,7 +6,9 @@ type OrderParams = {
 };
 
 async function list(): Promise<OrderDocument[]> {
-  return Order.find().populate('user');
+  return Order.find()
+    .sort({ createdAt: 'desc' })
+    .populate('user');
 }
 
 async function get(id: string): Promise<OrderDocument | null> {

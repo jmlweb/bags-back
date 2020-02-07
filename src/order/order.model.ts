@@ -7,16 +7,21 @@ export interface OrderDocument extends Document {
   user: string;
 }
 
-const OrderSchema: Schema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
-  bagsCount: {
-    type: Number,
-    default: 0,
-    validate: {
-      validator: validateBagsCount,
+const OrderSchema: Schema = new Schema(
+  {
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    bagsCount: {
+      type: Number,
+      default: 0,
+      validate: {
+        validator: validateBagsCount,
+      },
     },
   },
-});
+  {
+    timestamps: true,
+  },
+);
 
 const Order = mongoose.model<OrderDocument>('Order', OrderSchema);
 

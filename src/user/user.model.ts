@@ -6,19 +6,24 @@ export interface UserDocument extends Document {
   name: string;
 }
 
-export const UserSchema: Schema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  name: {
-    type: String,
-    validate: {
-      validator: validateName,
+export const UserSchema: Schema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    name: {
+      type: String,
+      validate: {
+        validator: validateName,
+      },
     },
   },
-});
+  {
+    timestamps: true,
+  },
+);
 
 const User = mongoose.model<UserDocument>('User', UserSchema);
 

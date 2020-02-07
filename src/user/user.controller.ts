@@ -2,7 +2,7 @@ import User, { UserDocument } from './user.model';
 import { Order } from '../order';
 
 async function list(): Promise<UserDocument[]> {
-  return User.find();
+  return User.find().sort({ createdAt: 'desc' });
 }
 
 async function get(id: string): Promise<UserDocument | null> {
