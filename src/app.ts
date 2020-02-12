@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import logger from 'morgan';
 
 import userRoutes from './user';
 import orderRoutes from './order';
@@ -10,6 +11,10 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('combined'));
+}
 
 connect();
 
