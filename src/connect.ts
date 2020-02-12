@@ -6,6 +6,8 @@ function connect(): void {
   mongoose.set('useNewUrlParser', true);
   mongoose.set('useCreateIndex', true);
   mongoose.set('debug', process.env.NODE_ENV === 'dev');
+  mongoose.set('useUnifiedTopology', true);
+  mongoose.set('useFindAndModify', false);
 
   mongoose.connect(
     getConfigItem(
